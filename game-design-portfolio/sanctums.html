@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanctums — Connor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img class="brand-mark" src="assets/logo.svg" alt="Connor logo">
+      Connor
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="daggerheart.html">Daggerheart</a></li>
+      <li><a href="runeterra.html">Runeterra</a></li>
+      <li><a href="leagueoflegends.html">League</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="system-intro reveal">
+    <span class="eyebrow fear">Homebrew System</span>
+    <h1>Sanctums</h1>
+    <p class="lede">
+      When it comes to player-driven systems, the focus has always been baked into the character sheet and domain cards.
+      With Sanctums, we stray a little off of the character sheet and domain cards, while still staying anchored to the player-driven fantasy.
+    </p>
+  </section>
+
+  <main>
+
+    <section class="showcase reveal">
+      <div class="showcase-text">
+        <span class="eyebrow">System</span>
+        <h2>Sanctum</h2>
+        <p class="showcase-oneliner">A place an adventurer can call home.</p>
+        <p class="showcase-body">
+          The goal for Sanctums is to give a player a mechanical way to commit to a specific domain from their selection.
+          This system could help a player really dive into the fantasy of being a shadow-steeped Rogue or a studied Bard.
+        </p>
+      </div>
+      <div class="showcase-example">
+        <div class="sanctum-spotlight">
+          <div id="domain-tab-strip" class="domain-tabs"></div>
+          <div class="sanctum-spotlight-stack">
+            <div id="sanctum-spotlight-card" class="sanctum-card"></div>
+            <button id="gallery-toggle-btn" class="gallery-toggle-btn">
+              <span class="btn-text">Full gallery display</span>
+              <span class="chevron">▾</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="sanctum-gallery" class="sanctum-gallery"></div>
+
+    <section class="step-section reveal">
+      <div class="step-section-head">
+        <span class="eyebrow">Process</span>
+        <h2>Steps to Sanctums</h2>
+      </div>
+      <div class="step-grid">
+        <div class="step-tile">
+          <span class="step-number">01</span>
+          <p class="step-label">Step 1</p>
+          <h3>Establishing a Sanctum</h3>
+          <p>
+            Starting at Tier 2, a player and GM can work together on when a
+            Sanctum is established. This could be a castle, a tavern, or a
+            wandering group of nomads who are a safe rendevous point
+            wherever the adventure is. Upon choosing a Sanctum, the player
+            gains the Sanctum benefits after their next long rest.
+          </p>
+        </div>
+        <div class="step-tile">
+          <span class="step-number">02</span>
+          <p class="step-label">Step 2</p>
+          <h3>New Downtime Move — Upkeep</h3>
+          <p>
+            After the long rest, the player obtains a new downtime move
+            called "Upkeep". The player instantiates an Upkeep Countdown (6)
+            that starts at 3. On a rest, a player that uses the Upkeep
+            downtime move rolls a 1d4, counting up on the Upkeep Countdown,
+            up to 6. If a player doesn't take the Upkeep downtime move, then
+            it counts down 1. Should it ever reach 0, the Sanctum becomes
+            temporarily <em>Dilapidated</em>, which will be discussed in
+            Step 4.
+          </p>
+        </div>
+        <div class="step-tile">
+          <span class="step-number">03</span>
+          <p class="step-label">Step 3</p>
+          <h3>Facilities</h3>
+          <p>
+            At Tiers 3 and Tier 4, you can attach a "Facility" to your
+            Sanctum. These act as minor boons to a player's character that
+            are passively powerful. This helps to ensure the power is felt,
+            but the <em>Cognitive Load</em> is not.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-tile step-tile-wide">
+        <span class="step-number">04</span>
+        <p class="step-label">Step 4</p>
+        <h3>Dilapidation</h3>
+        <p>
+          A Countdown 0 on the Upkeep Countdown means that the player
+          neglected their Sanctum to the point of disaster. Potential
+          consequences could include:
+        </p>
+        <ul class="step-list">
+          <li>Permanently placing a domain card into the vault.</li>
+          <li>Permanently destroying a Facility.</li>
+          <li>Gaining a temporary Scar.</li>
+          <li>Temporarily losing a Loadout Slot until the next level up, or until the GM deems otherwise if at level 10.</li>
+          <li>Temporarily increase Recall Costs by 1.</li>
+        </ul>
+        <p>
+          In order to remove the <em>Dilapidated</em> condition, the
+          player and the GM can work out a cost; A short adventure to
+          find the necessary materials, a total of 12 Hope spent over
+          time, or a permanent Scar for near immediate restoration. Once
+          the <em>Dilapidated</em> condition is removed, the Upkeep
+          Countdown is set to 2.
+        </p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Fan-made design work. Not affiliated with or endorsed by Darrington Press or Critical Role.</p>
+    <ul class="footer-links">
+      <li><a href="mailto:conhop30@gmail.com">Email</a></li>
+      <li><a href="https://github.com/conhop30?tab=repositories">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/sanctums.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+/* =========================================================
+   LEGENDS OF RUNETERRA THEME
+   Scoped under .rt-theme so it never touches the Daggerheart
+   token system. LoR's real chrome is a near-black backdrop
+   with gold trim — the "parchment" look is reserved for a
+   thin card mat, not the whole page.
+   ========================================================= */
+.rt-theme {
+  --rt-bg:          #100e0a;
+  --rt-bg-2:        #1a1611;
+  --rt-panel:       #1e1a14;
+  --rt-mat:         #d9c791;
+  --rt-gold:        #c9a227;
+  --rt-gold-light:  #e6d192;
+  --rt-gold-deep:   #7a611c;
+  --rt-text:        #ece4d1;
+  --rt-text-dim:    #948a73;
+
+  --rt-font-display: "Spectral", serif;
+  --rt-font-body:    "Lora", serif;
+
+  background: var(--rt-bg);
+  color: var(--rt-text);
+}
+
+.rt-hero {
+  padding: 90px 0 50px;
+}
+
+.rt-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rt-gold);
+  margin-bottom: 18px;
+}
+
+.rt-theme h1 {
+  font-family: var(--rt-font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  color: var(--rt-gold-light);
+  line-height: 1.12;
+}
+
+.rt-lede {
+  font-family: var(--rt-font-body);
+  margin-top: 22px;
+  max-width: 60ch;
+  font-size: 1.08rem;
+  color: var(--rt-text-dim);
+}
+
+.rt-section-title {
+  font-family: var(--rt-font-display);
+  font-size: 1.6rem;
+  color: var(--rt-gold-light);
+  margin-bottom: 8px;
+}
+
+.rt-section-sub {
+  font-family: var(--rt-font-body);
+  color: var(--rt-text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+/* =========================================================
+   CARD DISPLAY — a simple frame for your own card image.
+   No overlaid cost/text/stats: the image already has all of
+   that baked in. Just a gold frame, a thin parchment mat
+   (like matting behind glass), and a shadow to lift it off
+   the dark background.
+   ========================================================= */
+
+/* =========================================================
+   FEATURED SPOTLIGHTS — card image + design rationale
+   ========================================================= */
+
+.rt-spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.rt-spotlight-card {
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
+  background: var(--rt-panel);
+  border: 1px solid rgba(201,162,39,0.2);
+  border-radius: 14px;
+  padding: 26px;
+}
+
+.rt-spotlight-card .rt-card {
+  flex-shrink: 0;
+  width: 250px;
+}
+
+.rt-spotlight-detail h3 {
+  font-family: var(--rt-font-display);
+  font-size: 1.15rem;
+  color: var(--rt-gold);
+  margin-bottom: 10px;
+}
+
+.rt-spotlight-detail p {
+  font-family: var(--rt-font-body);
+  font-size: 0.92rem;
+  color: var(--rt-text-dim);
+  line-height: 1.6;
+}
+
+/* =========================================================
+   FULL GALLERY — plain, uniform grid, no special formatting
+   ========================================================= */
+.rt-gallery-section { padding: 30px 0 90px; }
+
+.rt-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .rt-spotlight-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .rt-spotlight-card { flex-direction: column; }
+  .rt-spotlight-card .rt-card { width: 100%; max-width: 220px; }
+}

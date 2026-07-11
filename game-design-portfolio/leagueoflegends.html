@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>League of Legends — Connor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/league.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img class="brand-mark" src="assets/logo.svg" alt="Connor logo">
+      Connor
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="daggerheart.html">Daggerheart</a></li>
+      <li><a href="runeterra.html">Runeterra</a></li>
+      <li><a href="leagueoflegends.html" class="active">League</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </div>
+</nav>
+
+<div class="lol-theme">
+  <header class="lol-hero wrap">
+    <p class="lol-eyebrow">Character Design</p>
+    <h1>League of Legends</h1>
+    <p class="lol-lede">
+      Original champion concepts, kits, and thematic identity work. Click
+      any champion in the gallery to bring up their full kit and lore below.
+    </p>
+  </header>
+
+  <main class="wrap">
+    <section class="lol-gallery-section reveal">
+      <h2 class="lol-section-title">Champion Concepts</h2>
+      <div id="lol-gallery" class="lol-gallery-grid"></div>
+    </section>
+
+    <section class="lol-spotlight-section reveal">
+      <h2 class="lol-section-title">Champion Spotlight</h2>
+      <div id="lol-spotlight" class="lol-spotlight-panel"></div>
+    </section>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Fan-made design work. Not affiliated with or endorsed by Riot Games.</p>
+    <ul class="footer-links">
+      <li><a href="mailto:you@example.com">Email</a></li>
+      <li><a href="#">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/league.js"></script>
+</body>
+</html>

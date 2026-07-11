@@ -1,0 +1,265 @@
+/* =========================================================
+   LEAGUE OF LEGENDS THEME
+   Scoped under .lol-theme. Modeled on League's Hextech system:
+   dark navy, gold framing, a cyan-teal focal accent, and clean
+   geometric shapes rather than Runeterra's tactile parchment.
+   ========================================================= */
+.lol-theme {
+  --lol-bg:        #0a1428;
+  --lol-bg-2:      #0f1c34;
+  --lol-panel:     #1e2328;
+  --lol-panel-2:   #232a31;
+  --lol-gold:      #c89b3c;
+  --lol-gold-light:#f0e6d2;
+  --lol-gold-deep: #785a28;
+  --lol-teal:      #0ac8b9;
+  --lol-text:      #f0e6d2;
+  --lol-text-dim:  #a09b8c;
+
+  --lol-font-display: "Rajdhani", sans-serif;
+
+  background:
+    radial-gradient(900px 500px at 100% 0%, rgba(10,200,185,0.08), transparent 60%),
+    var(--lol-bg);
+  color: var(--lol-text);
+}
+
+.lol-hero { padding: 90px 0 50px; }
+
+.lol-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lol-teal);
+  margin-bottom: 18px;
+}
+
+.lol-theme h1 {
+  font-family: var(--lol-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  color: var(--lol-gold-light);
+  line-height: 1.1;
+}
+
+.lol-lede {
+  margin-top: 22px;
+  max-width: 60ch;
+  font-size: 1.05rem;
+  color: var(--lol-text-dim);
+}
+
+.lol-section-title {
+  font-family: var(--lol-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 1.4rem;
+  color: var(--lol-gold-light);
+  margin-bottom: 22px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--lol-gold-deep);
+}
+
+/* =========================================================
+   SPOTLIGHT PANEL — populated by JS on champion click
+   ========================================================= */
+.lol-spotlight-section { padding: 30px 0 60px; }
+
+.lol-spotlight-panel {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 34px;
+  background: var(--lol-panel);
+  border: 1px solid var(--lol-gold-deep);
+  border-radius: 4px;
+  padding: 32px;
+  position: relative;
+}
+
+.lol-spotlight-panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--lol-gold), var(--lol-teal));
+}
+
+.lol-portrait {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  border: 2px solid var(--lol-gold);
+  background: linear-gradient(150deg, var(--lol-bg-2), var(--lol-panel-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--lol-text-dim);
+  text-align: center;
+  padding: 16px;
+}
+
+.lol-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lol-champ-name {
+  font-family: var(--lol-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.9rem;
+  color: var(--lol-gold-light);
+  letter-spacing: 0.02em;
+}
+
+.lol-champ-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lol-teal);
+  margin-top: 4px;
+}
+
+.lol-champ-role {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lol-text-dim);
+  border: 1px solid var(--lol-gold-deep);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.lol-champ-lore {
+  margin-top: 18px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--lol-text-dim);
+  max-width: 62ch;
+}
+
+.lol-ability-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lol-ability-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--lol-panel-2);
+  border-radius: 4px;
+  border-left: 2px solid var(--lol-gold-deep);
+}
+
+.lol-ability-key {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  border-radius: 4px;
+  background: var(--lol-bg-2);
+  border: 1px solid var(--lol-gold);
+  color: var(--lol-gold-light);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--lol-font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.lol-ability-row.is-passive .lol-ability-key {
+  border-color: var(--lol-teal);
+  color: var(--lol-teal);
+}
+
+.lol-ability-name {
+  font-family: var(--lol-font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--lol-gold-light);
+  margin-bottom: 4px;
+}
+
+.lol-ability-desc {
+  font-size: 0.87rem;
+  color: var(--lol-text-dim);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   CHAMPION GALLERY
+   ========================================================= */
+.lol-gallery-section { padding: 20px 0 90px; }
+
+.lol-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+.lol-champ-tile {
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--lol-gold-deep);
+  background: var(--lol-panel);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.lol-champ-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--lol-gold);
+}
+
+.lol-champ-tile.is-active {
+  border-color: var(--lol-teal);
+  box-shadow: 0 0 0 1px var(--lol-teal);
+}
+
+.lol-champ-tile .lol-tile-portrait {
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(150deg, var(--lol-bg-2), var(--lol-panel-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--lol-text-dim);
+}
+
+.lol-champ-tile .lol-tile-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lol-champ-tile .lol-tile-name {
+  padding: 10px 10px 12px;
+  font-family: var(--lol-font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--lol-gold-light);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .lol-spotlight-panel {
+    grid-template-columns: 1fr;
+  }
+  .lol-portrait { max-width: 220px; margin: 0 auto; }
+}

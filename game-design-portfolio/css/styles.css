@@ -1,0 +1,1109 @@
+/* =========================================================
+   DESIGN TOKENS
+   Palette drawn from Daggerheart's Hope/Fear duality:
+   warm gold (Hope) against deep violet (Fear), set into an
+   ink-dark page like a well-worn rulebook read by candlelight.
+   ========================================================= */
+:root {
+  --ink:            #14121b;
+  --ink-raised:     #1e1a28;
+  --ink-raised-2:   #262034;
+  --line:           rgba(237, 228, 211, 0.12);
+  --line-strong:    rgba(237, 228, 211, 0.22);
+
+  --hope:           #e4b341;
+  --hope-dim:       #8a6c2a;
+  --hope-soft:      rgba(228, 179, 65, 0.14);
+
+  --fear:           #8867d6;
+  --fear-dim:       #4b3a7a;
+  --fear-soft:      rgba(136, 103, 214, 0.16);
+
+  --parchment:      #ede4d3;
+  --parchment-dim:  #a79c89;
+  --parchment-faint:#6f6759;
+
+  /* Domain palette — adapted from Daggerheart's nine domains, tuned
+     for contrast against this site's dark background. Swap for exact
+     official values if you have them from the Card Creator. */
+  --domain-arcana:   #9b6fd9;
+  --domain-blade:    #c0483a;
+  --domain-bone:     #9a9078;
+  --domain-codex:    #3f7bb0;
+  --domain-grace:    #c1568f;
+  --domain-midnight: #3f4d82;
+  --domain-sage:     #5c9159;
+  --domain-splendor: #d99a2b;
+  --domain-valor:    #c67a3a;
+
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  --wrap: 1160px;
+  --radius-card: 18px;
+  --radius-sm: 8px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 700px at 15% -10%, rgba(136,103,214,0.10), transparent 60%),
+    radial-gradient(1000px 600px at 100% 0%, rgba(228,179,65,0.08), transparent 55%),
+    var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.08;
+  margin: 0;
+  color: var(--parchment);
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(20, 18, 27, 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand .brand-mark {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--parchment-dim);
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.25s var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--hope);
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--hope), var(--fear));
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--parchment);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* =========================================================
+   EYEBROWS / LABELS
+   Eyebrow text names the content type (mechanic, subclass,
+   domain card, facility) — it's a category label, not a
+   sequence, so no numbering.
+   ========================================================= */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hope);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.eyebrow.fear { color: var(--fear); }
+
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* =========================================================
+   DUALITY DIVIDER — signature element
+   Two dice pips joined at a hairline: gold (Hope) left,
+   violet (Fear) right, echoing the duality-dice roll that
+   sits at the center of Daggerheart's core mechanic.
+   ========================================================= */
+.duality-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 96px 0;
+  opacity: 0.9;
+}
+
+.duality-divider .line {
+  height: 1px;
+  flex: 1;
+  max-width: 240px;
+}
+
+.duality-divider .line.hope-line {
+  background: linear-gradient(90deg, transparent, var(--hope-dim));
+}
+
+.duality-divider .line.fear-line {
+  background: linear-gradient(90deg, var(--fear-dim), transparent);
+}
+
+.duality-divider svg { width: 26px; height: 26px; }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  padding: 120px 0 80px;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--parchment-dim);
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  max-width: 16ch;
+  background: linear-gradient(120deg, var(--parchment) 40%, var(--hope) 75%, var(--fear) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero p.lede {
+  margin-top: 28px;
+  max-width: 56ch;
+  font-size: 1.15rem;
+  color: var(--parchment-dim);
+}
+
+.hero-actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--hope), #c98f2c);
+  color: #1a1508;
+  box-shadow: 0 8px 30px -8px rgba(228,179,65,0.55);
+}
+
+.btn-primary:hover { transform: translateY(-2px); }
+
+.btn-ghost {
+  border: 1px solid var(--line-strong);
+  color: var(--parchment);
+}
+
+.btn-ghost:hover { border-color: var(--fear); color: var(--fear); }
+
+/* =========================================================
+   PROJECT CARDS (home page)
+   ========================================================= */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin: 60px 0 120px;
+}
+
+.project-card {
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+}
+
+.project-card.featured {
+  grid-column: span 3;
+  padding: 46px;
+  background:
+    linear-gradient(135deg, rgba(228,179,65,0.10), rgba(136,103,214,0.10)),
+    var(--ink-raised-2);
+  border-color: var(--hope-dim);
+}
+
+.project-card .tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fear);
+  margin-bottom: 14px;
+  display: block;
+}
+
+.project-card.featured .tag { color: var(--hope); }
+
+.project-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.project-card.featured h3 { font-size: 2.1rem; }
+
+.project-card p {
+  color: var(--parchment-dim);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.project-card .go {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--parchment-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-card:hover .go { color: var(--hope); }
+
+/* =========================================================
+   TWO-COLUMN SHOWCASE SECTIONS
+   Header + one-liner + paragraph, with an example mockup
+   alternating sides. This is the core recurring pattern
+   for class / subclass / domain-card / sanctum writeups.
+   ========================================================= */
+.showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.showcase.reverse .showcase-text { order: 2; }
+.showcase.reverse .showcase-example { order: 1; }
+
+.showcase-text h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.showcase-oneliner {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--hope);
+  margin-top: 12px;
+}
+
+.showcase-body {
+  margin-top: 22px;
+  color: var(--parchment-dim);
+  font-size: 1rem;
+  max-width: 46ch;
+}
+
+.showcase-body p + p { margin-top: 14px; }
+
+.fit-note {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border-left: 2px solid var(--fear);
+  background: var(--fear-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.9rem;
+  color: var(--parchment-dim);
+}
+
+.fit-note strong {
+  color: var(--fear);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.showcase-example {
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================================================
+   DOMAIN CARD MOCKUP
+   Modeled on Daggerheart's real card anatomy: colored header
+   band per domain, level badge, recall-cost pips, card type.
+   ========================================================= */
+.domain-card {
+  width: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ink-raised-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  transition: transform 0.4s var(--ease);
+}
+
+.domain-card:hover { transform: rotate(-1.5deg) translateY(-4px); }
+
+.domain-card-header {
+  padding: 20px 56px 14px;
+  background: linear-gradient(135deg, var(--domain-color, var(--fear)), transparent 140%);
+  position: relative;
+}
+
+.domain-card-domain {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237,228,211,0.85);
+}
+
+.domain-card-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin-top: 6px;
+  color: var(--parchment);
+}
+
+/* Badge base — level and recall cost share size/position logic but
+   differ in shape and border color so they're never mistaken for
+   each other: a circle in Hope-gold for level (progression), a
+   hexagon in Fear-violet for recall cost (a price paid in Stress). */
+.domain-card-badge {
+  position: absolute;
+  top: 14px;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: rgba(20,18,27,0.62);
+  backdrop-filter: blur(2px);
+}
+
+.domain-card-badge .badge-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  color: rgba(237,228,211,0.55);
+  white-space: nowrap;
+}
+
+.domain-card-level {
+  left: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--hope);
+}
+
+.domain-card-cost {
+  right: 14px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border: 1.5px solid var(--fear);
+}
+
+.domain-card-body {
+  padding: 24px 20px 20px;
+}
+
+.domain-card-type {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment-faint);
+  margin-bottom: 10px;
+}
+
+.domain-card-text {
+  font-size: 0.9rem;
+  color: var(--parchment-dim);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   SANCTUM CARD
+   Deliberately distinct from the domain-card: no level, no
+   recall cost (Sanctums aren't loadout cards), just a domain-
+   tinted header and two stacked features.
+   ========================================================= */
+.sanctum-card {
+  width: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ink-raised-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.sanctum-card-header {
+  padding: 22px 20px 18px;
+  background: linear-gradient(135deg, var(--domain-color, var(--fear)), transparent 150%);
+  border-bottom: 1px solid var(--line);
+}
+
+.sanctum-card-domain {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(237,228,211,0.85);
+}
+
+.sanctum-card-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-top: 8px;
+  color: var(--parchment);
+}
+
+.sanctum-card-features {
+  display: flex;
+  flex-direction: column;
+}
+
+.sanctum-feature {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sanctum-feature:last-child { border-bottom: none; }
+
+.sanctum-feature-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hope);
+  margin-bottom: 6px;
+}
+
+.sanctum-feature.is-boon .sanctum-feature-label { color: var(--fear); }
+
+.sanctum-feature-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: var(--parchment);
+}
+
+.sanctum-feature-desc {
+  font-size: 0.87rem;
+  color: var(--parchment-dim);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   DOMAIN TAB STRIP — vertical, sits beside the spotlight card
+   rather than above it, so nine tabs don't crush the column.
+   ========================================================= */
+.sanctum-spotlight {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+}
+
+.sanctum-spotlight-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.domain-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+  width: 128px;
+}
+
+.domain-tab {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--parchment-dim);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.domain-tab .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--tab-color, var(--fear));
+  flex-shrink: 0;
+}
+
+.domain-tab:hover {
+  border-color: var(--line-strong);
+  color: var(--parchment);
+}
+
+.domain-tab.active {
+  color: var(--parchment);
+  border-color: var(--tab-color, var(--hope));
+  background: color-mix(in srgb, var(--tab-color, var(--hope)) 16%, transparent);
+}
+
+.gallery-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--parchment-dim);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.gallery-toggle-btn:hover {
+  border-color: var(--hope);
+  color: var(--hope);
+}
+
+.gallery-toggle-btn .chevron {
+  transition: transform 0.3s var(--ease);
+}
+
+.gallery-toggle-btn.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+   SANCTUM GALLERY (full grid, toggled)
+   ========================================================= */
+.sanctum-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s var(--ease), opacity 0.4s var(--ease), margin 0.5s var(--ease);
+  margin-top: 0;
+}
+
+.sanctum-gallery.open {
+  max-height: 2000px;
+  opacity: 1;
+  margin-top: 48px;
+}
+
+.sanctum-gallery .sanctum-card {
+  width: 100%;
+  cursor: pointer;
+}
+
+.sanctum-gallery .sanctum-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+}
+
+.sanctum-gallery .sanctum-card.is-active {
+  border-color: var(--hope);
+}
+
+/* =========================================================
+   STEP GRID — standalone numbered tiles (2x2), used to walk
+   through a sequential process without implying a two-column
+   showcase or card-based content type.
+   ========================================================= */
+.step-section {
+  padding: 70px 0 20px;
+}
+
+.step-section-head {
+  max-width: 62ch;
+  margin-bottom: 36px;
+}
+
+.step-section-head h2 {
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+}
+
+.step-section-head p {
+  margin-top: 14px;
+  color: var(--parchment-dim);
+}
+
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-tile-wide {
+  margin-top: 20px;
+}
+
+.step-tile {
+  position: relative;
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 30px 28px;
+  overflow: hidden;
+}
+
+.step-tile .step-number {
+  position: absolute;
+  top: 6px;
+  right: 18px;
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  color: var(--hope-dim);
+  opacity: 0.3;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.step-tile .step-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fear);
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.step-tile h3 {
+  font-size: 1.25rem;
+  position: relative;
+  margin-bottom: 10px;
+  max-width: 85%;
+}
+
+.step-tile p {
+  font-size: 0.9rem;
+  color: var(--parchment-dim);
+  position: relative;
+}
+
+.step-tile p + p {
+  margin-top: 12px;
+}
+
+.step-tile .step-list {
+  position: relative;
+  margin: 12px 0;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: var(--parchment-dim);
+}
+
+.step-tile .step-list li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.step-tile em {
+  color: var(--fear);
+  font-style: italic;
+}
+
+@media (max-width: 860px) {
+  .step-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .step-grid { grid-template-columns: 1fr; }
+}
+.feature-stack {
+  margin-top: 22px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--ink-raised);
+}
+
+.feature-row {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.feature-row:last-child { border-bottom: none; }
+
+.feature-tier {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hope);
+  margin-bottom: 6px;
+}
+
+.feature-row.tier-fear .feature-tier { color: var(--fear); }
+
+.feature-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.feature-desc {
+  font-size: 0.88rem;
+  color: var(--parchment-dim);
+}
+
+.domain-pills {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.domain-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--parchment-dim);
+}
+
+/* =========================================================
+   SANCTUMS INTRO / OVERVIEW BLOCK
+   ========================================================= */
+.system-intro {
+  padding: 60px 0 20px;
+  max-width: 74ch;
+}
+
+.system-intro .eyebrow { margin-bottom: 20px; }
+
+.system-intro h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+.system-intro .lede {
+  margin-top: 22px;
+  font-size: 1.1rem;
+  color: var(--parchment-dim);
+}
+
+.compare-strip {
+  margin-top: 34px;
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  color: var(--parchment-dim);
+  align-items: baseline;
+}
+
+.compare-strip strong { color: var(--parchment); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 50px 0 70px;
+  margin-top: 100px;
+}
+
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-footer p {
+  color: var(--parchment-faint);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--parchment-dim);
+  font-size: 0.85rem;
+}
+
+.footer-links a:hover { color: var(--hope); }
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
+.about-photo {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--hope-dim);
+  background: var(--ink-raised-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.3);
+  transform-origin: center;
+  object-position: center 30%;
+}
+
+.about-photo .photo-placeholder {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--parchment-faint);
+  text-align: center;
+  padding: 20px;
+}
+
+.contact-list {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--parchment);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.contact-row:hover {
+  border-color: var(--hope-dim);
+  transform: translateX(4px);
+}
+
+.contact-row .contact-icon {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hope);
+}
+
+.contact-row .contact-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.contact-row .contact-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-row .contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment-faint);
+}
+
+.contact-row .contact-value {
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+
+  .project-grid { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: span 1; }
+
+  .showcase {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .showcase.reverse .showcase-text { order: 1; }
+  .showcase.reverse .showcase-example { order: 2; }
+
+  .duality-divider { margin: 64px 0; }
+
+  .sanctum-gallery { grid-template-columns: 1fr; }
+
+  .sanctum-spotlight {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .domain-tabs {
+    flex-direction: row;
+    width: 100%;
+    max-width: 320px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .domain-tab {
+    flex-shrink: 0;
+    width: auto;
+  }
+}
