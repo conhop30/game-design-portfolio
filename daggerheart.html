@@ -76,20 +76,30 @@
         <div class="feature-row">
           <p class="feature-tier">Class Features</p>
           <p class="feature-name">Summon</p>
-          <p class="feature-desc">After a long rest, place a number of tokens equal to your Spellcast trait.
-            <strong>Spend a token</strong> to summon a creature within Close range. If you would like to summon an additional creature immediately after, make a <strong>Spellcast roll (15)</strong>.
+          <p class="feature-desc">After a short rest, place a number of tokens equal to your Spellcast trait.
+            <strong>Spend any number of tokens</strong> to summon a Summons within Close range for each token.
             <br>
-            You can command the creature to perform a simple, non-hostile action or make a <strong>Spellcast roll</strong> to make it attack a target within Close range of it.
-            Any creatures you have summoned disappear when you take Severe damage or at the end of a scene.</p>
-            <p class="feature-desc">A Summon has an attack range of Melee and uses a d6 for damage rolls using your Proficiency. At each Tier, their damage die increases by one die size. d6 → d8 → d10 → d12
-            </p>
-          <p class="feature-name">Strength In Numbers</p>
+            You can command Summons to perform simple, non-hostile actions.
+            <br>
+            During combat, you can spotlight 1 Summons. For each Summons after, you must <strong>mark a Stress</strong>. When you take Severe damage, remove one Summon. Otherwise, remove any existing Summons at the end of the scene.
+            <br>
+            A Summon has an attack range of Melee and uses a <strong>d6</strong> for damage rolls using your Proficiency. At each Tier, their damage die increases by one die size. (d6 becomes d8, d8 becomes d10, etc...)
+            They can move up to Close range when you spotlight them.
+          </p>
+          <p class="feature-name">Array of Skills</p>
+          <p class="feature-desc">During your spotlight, you can <strong>mark a Stress</strong> to do one of the following:
+            <ul>
+              <li>Spotlight an amount of Summons equal to your tier.</li>
+              <li>On a successful attack by a Summons, the target is temporarily <em>Vulnerable</em>.</li>
+            </ul>
+          </p>
+            <p class="feature-name">Strength In Numbers</p>
           <p class="feature-desc">For each summons, gain a +1 to your Severe Threshold.</p>
         </div>
         <div class="feature-row tier-fear">
           <p class="feature-tier">Hope Feature</p>
           <p class="feature-name">Beckon</p>
-          <p class="feature-desc"><strong>Spend 3 Hope</strong> to gain 1 summons token, up to your Spellcast trait.</p>
+          <p class="feature-desc"><strong>Spend 3 Hope</strong> to gain <strong>1d4</strong> summons tokens, up to your Spellcast trait.</p>
         </div>
       </div>
     </div>
@@ -119,7 +129,7 @@
         </p>
       </div>
       <div class="fit-note">
-        <strong>Why this fits Daggerheart</strong>
+        <strong>Designer Note</strong>
         Giving a PC the chance to narrate something so awesome in scale but potentially morally complex leads to compelling table dynamics.
         There is also room within the subclass ecosystem for a more selfish playstyle that doesn't actively detract from other PCs, but rather is a unique resource that the Summoner PC manages.
       </div>
@@ -150,23 +160,68 @@
     </div>
   </section>
 
-  <section class="showcase solo reveal">
+  <section class="showcase reveal">
     <div class="showcase-text">
       <span class="eyebrow">Subclass</span>
       <h2>Behemoth <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
       <p class="showcase-oneliner">Grow until nothing can stop you.</p>
       <div class="showcase-body">
         <p>
-          Coming Soon...
+          Take the strength of an army and condense it into a singular Summons, a demi-god under your control.
         </p>
         <p>
-          Spellcast trait: <strong>Knowledge</strong>
+          Spellcast trait: <strong>Presence</strong>
         </p>
+      </div>
+      <div class="fit-note">
+        <strong>Design Note</strong>
+        This subclass could negatively blur the lines with the Beastbound Ranger.
+        To avoid that, we can lean on the design behind the Beastbound being focused around a parternship and how the mechanics represent that dependency on one another.
+        For this subclass, it should be focused on the Summons being a tool, non-autonomous, and separate the idea of a "partnership" with "master".
+      </div>
+    </div>
+    <div class="showcase-example">
+      <div class="feature-stack" style="width: 320px;">
+        <div class="feature-row">
+          <p class="feature-tier">Foundation</p>
+          <p class="feature-name">The One</p>
+          <p class="feature-desc">Your Summons damage die starts as a <strong>d8</strong>.</p>
+          <p class="feature-name">Combined Might</p>
+          <p class="feature-desc">When you spend a summons token while a Summons exists, a new Summons doesn't appear. Instead, for each token spent, the existing Summons gains the following:</p>
+          <ul>
+            <li>+4 on damage rolls</li>
+            <li>Grows in size</li>
+            <li>Increases your Severe threshold by +1</li>
+          </ul>
+        </div>
+        <div class="feature-row">
+          <p class="feature-tier">Specialization</p>
+          <p class="feature-name">Familiar Voice</p>
+          <p class="feature-desc">Your Summons obeys your commands comfortably. When you make an action roll that involves your Summons, gain a +2.</p>
+          <p class="feature-name">Expanded Presence</p>
+          <p class="feature-desc">When your Summons is existing while trying to persuade or intimdate someone, you can <strong>spend a Hope</strong> to add the following:</p>
+          <ul>
+            <li>On a Hope, gain an additional Hope.</li>
+            <li>On a Fear, you can remove 2 unspent Summons tokens to stop the GM from gaining a Fear.</li>
+          </ul>
+        </div>
+        <div class="feature-row tier-fear">
+          <p class="feature-tier">Mastery</p>
+          <p class="feature-name">Unbreakable Will</p>
+          <p class="feature-desc">When you take Severe damage, instead of your Summons being removed, you can <strong>mark a Stress</strong>.</p>
+          <p class="feature-name">As One</p>
+          <p class="feature-desc">Once per rest, when you spend a summons token that would create a Summons, you can <strong>spend a Hope</strong> to become a copy of it and must <strong>spend a Hope</strong> for every action after.
+            If you can't, you drop out of the copied form.
+            Your Summons can use your weapon feature on it's rolls.
+            You and your Summons can move up to Far range without having to make an Agility Reaction roll.
+            You can <strong>spend a hope</strong> to swap positions with your Summons within far range of each other.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="showcase solo reveal">
+  <section class="showcase reverse reveal">
     <div class="showcase-text">
       <span class="eyebrow fear">Subclass</span>
       <h2>Totem <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
@@ -181,23 +236,47 @@
       </div>
     </div>
   </section>
-
-  <section class="showcase solo reveal">
+  <section class="showcase reveal">
     <div class="showcase-text">
       <span class="eyebrow">Subclass</span>
       <h2>Swarm <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
       <p class="showcase-oneliner">Endless. All-consuming. Don't fear the inevitable.</p>
       <div class="showcase-body">
         <p>
-          Coming Soon...
+          Open the portal to an endless wave of your will, drowning anyone who stands in the way.
         </p>
         <p>
           Spellcast trait: <strong>Presence</strong>
         </p>
       </div>
     </div>
+    <div class="showcase-example">
+      <div class="feature-stack" style="width: 320px;">
+        <div class="feature-row">
+          <p class="feature-tier">Foundation</p>
+          <p class="feature-name">The Many</p>
+          <p class="feature-desc">Gain the <em>Swarm Sheet</em>. Your Summons damage die starts as a <strong>d4</strong>. Instead of gaining summons tokens up to your Spellcast trait, gain tokens equal to your level or Spellcast trait, whichever is higher.</p>
+          <p class="feature-name">Weaker Wills</p>
+          <p class="feature-desc">Instead of marking Stress to command additional Summons, you can also choose to <strong>spend a Hope</strong>.</p>
+          <p class="feature-name">Greater Command</p>
+          <p class="feature-desc">For each Summons you would spotlight, you can spotlight as many as equal to your tier.</p>
+        </div>
+        <div class="feature-row">
+          <p class="feature-tier">Specialization</p>
+          <p class="feature-name">Always Loyal</p>
+          <p class="feature-desc">When you </p>
+          <p class="feature-name">The Gift of Servants</p>
+          <p class="feature-desc">When you use a downtime move, you can use any unspent summons tokens to perform an addtional downtime move.</p>
+        </div>
+        <div class="feature-row tier-fear">
+          <p class="feature-tier">Mastery</p>
+          <p class="feature-name">Volatile Mitosis</p>
+          <p class="feature-desc">When you mark Severe damage, roll d6s equal to your Spellcast trait. On a 6, choose a Summons. It splits into two <em>Volatile</em> Summons. The next time they obey your command, they are removed.</p>
+        </div>
+      </div>
+    </div>
   </section>
-
+  
   <div class="duality-divider">
     <div class="line hope-line"></div>
     <svg viewBox="0 0 24 24" fill="none"><polygon points="12,1 23,7.5 23,16.5 12,23 1,16.5 1,7.5" fill="none" stroke="var(--fear)" stroke-width="1.2"/></svg>
