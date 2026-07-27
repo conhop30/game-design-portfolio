@@ -213,7 +213,7 @@ const DOMAIN_DATA = [
       },
       {
         domainColor: "var(--fear-dim)",
-        cardName: "Reassurance",
+        cardName: "#9",
         level: 4,
         recall: 1,
         type: "Ability",
