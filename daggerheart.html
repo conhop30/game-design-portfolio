@@ -29,7 +29,7 @@
 </nav>
 
 <header class="hero wrap" style="padding-bottom: 40px;">
-  <p class="hero-eyebrow">Design Note</p>
+  <p class="hero-eyebrow">Daggerheart Homebrew</p>
   <h1>Daggerheart: <br>Where memories are built on laughter, sorrow, and epic moments.</h1>
   <p class="lede">
     Here, you will find a few examples of my Daggerheart designs, varying in scope.
@@ -41,247 +41,13 @@
 <main class="wrap">
 
   <!-- ============================================================
-       CLASS TEMPLATE
+       CLASSES — data-driven, rendered by js/daggerheart.js.
+       Clicking a tab swaps in that class's entire cluster: the
+       Class block, then all of its subclasses stacked below.
        ============================================================ -->
-  <section class="showcase reveal">
-    <div class="showcase-text">
-      <span class="eyebrow">Class</span>
-      <h2>Summoner</h2>
-      <p class="showcase-oneliner"><em>A friend is never far away... a subordinate would also do.</em></p>
-      <div class="showcase-body">
-        <p>
-          The Summoner is focused on controlling a space either by bolstering allies or subjugating adversaries.
-          Should they so choose, they can rely solely on themselves, summoning their own creatures and subordinates.
-          When the Summoner enters a room, they are never alone and any who oppose them could very well find themselves a subject under the Summoner's thumb.
-        </p>
-      </div>
-      <div class="domain-pills">
-        <span class="domain-pill">Domain: Domination</span>
-        <span class="domain-pill">Domain: Grace</span>
-      </div>
-      <div class="fit-note">
-        <strong>Design Note</strong>
-        Daggerheart has focused primarily on a hero being the source of power, with a few explorations of other entities being integrated via constructs and the Beastbound Ranger.
-        Devoting a whole class to a Summoner was a deliberate decision, as this fantasy can be expanded past the scope of a subclass. Potential subclasses would include:
-        <ul>
-          <li>Swarm</li>
-          <li>Behemoth</li>
-          <li>Totem</li>
-          <li>Sacrificer</li>
-        </ul>
-      </div>
-    </div>
-    <div class="showcase-example">
-      <div class="feature-stack" style="width: 320px;">
-        <div class="feature-row">
-          <p class="feature-tier">Class Features</p>
-          <p class="feature-name">Summon</p>
-          <p class="feature-desc">After a short rest, place a number of tokens equal to your Spellcast trait.
-            <strong>Spend any number of tokens</strong> to summon a Summons within Close range for each token.
-            <br>
-            You can command Summons to perform simple, non-hostile actions.
-            <br>
-            During combat, you can spotlight 1 Summons. For each Summons after, you must <strong>mark a Stress</strong>. When you take Severe damage, remove one Summon. Otherwise, remove any existing Summons at the end of the scene.
-            <br>
-            A Summon has an attack range of Melee and uses a <strong>d6</strong> for damage rolls using your Proficiency. At each Tier, their damage die increases by one die size. (d6 becomes d8, d8 becomes d10, etc...)
-            They can move up to Close range when you spotlight them.
-          </p>
-          <p class="feature-name">Array of Skills</p>
-          <p class="feature-desc">During your spotlight, you can <strong>mark a Stress</strong> to do one of the following:
-            <ul>
-              <li>Spotlight an amount of Summons equal to your tier.</li>
-              <li>On a successful attack by a Summons, the target is temporarily <em>Vulnerable</em>.</li>
-            </ul>
-          </p>
-            <p class="feature-name">Strength In Numbers</p>
-          <p class="feature-desc">For each summons, gain a +1 to your Severe Threshold.</p>
-        </div>
-        <div class="feature-row tier-fear">
-          <p class="feature-tier">Hope Feature</p>
-          <p class="feature-name">Beckon</p>
-          <p class="feature-desc"><strong>Spend 3 Hope</strong> to gain <strong>1d4</strong> summons tokens, up to your Spellcast trait.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div id="class-tab-strip" class="tab-strip-h"></div>
+  <div id="class-cluster"></div>
 
-  <div class="duality-divider">
-    <div class="line hope-line"></div>
-    <svg viewBox="0 0 24 24" fill="none"><polygon points="12,1 23,7.5 23,16.5 12,23 1,16.5 1,7.5" fill="none" stroke="var(--hope)" stroke-width="1.2"/></svg>
-    <div class="line fear-line"></div>
-  </div>
-
-  <!-- ============================================================
-       SUBCLASS TEMPLATE
-       ============================================================ -->
-  <section class="showcase reverse reveal">
-    <div class="showcase-text">
-      <span class="eyebrow fear">Subclass</span>
-      <h2>Sacrificer <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
-      <p class="showcase-oneliner">For when others are just pawns in your game.</p>
-      <div class="showcase-body">
-        <p>
-          Instead of focusing on sustaining your summoned creatures, they turn into batteries.
-          When a Sacrificer needs to tap into their overwhelming strength, those that are under their rule will serve their finite, honorable purpose.
-        </p>
-        <p>
-          Spellcast trait: <strong>Presence</strong>
-        </p>
-      </div>
-      <div class="fit-note">
-        <strong>Designer Note</strong>
-        Giving a PC the chance to narrate something so awesome in scale but potentially morally complex leads to compelling table dynamics.
-        There is also room within the subclass ecosystem for a more selfish playstyle that doesn't actively detract from other PCs, but rather is a unique resource that the Summoner PC manages.
-      </div>
-    </div>
-    <div class="showcase-example">
-      <div class="feature-stack" style="width: 320px;">
-        <div class="feature-row">
-          <p class="feature-tier">Foundation</p>
-          <p class="feature-name">Bolster Me</p>
-          <p class="feature-desc">When you succeed on an attack roll or spellcast roll that deals damage and there is a summon within Very Close range, you gain bonus damage equal to your tier to the damage roll for each summons.</p>
-          <p class="feature-name">Consume The Weak</p>
-          <p class="feature-desc">When you would mark your last HP and there is a summons within Very Close range, you can instead remove the summons and clear a HP instead.</p>
-        </div>
-        <div class="feature-row">
-          <p class="feature-tier">Specialization</p>
-          <p class="feature-name">Always Loyal</p>
-          <p class="feature-desc">A summons can move up to Far range to get within Melee range of you. If this is used when an attack roll succeeds against you, you can remove the summons to add disadvantage to the attack roll.</p>
-          <p class="feature-name">The Gift of Servants</p>
-          <p class="feature-desc">When you use a downtime move, you can use any unspent summons tokens to perform an addtional downtime move.</p>
-        </div>
-        <div class="feature-row tier-fear">
-          <p class="feature-tier">Mastery</p>
-          <p class="feature-name">Repurposed Servant</p>
-          <p class="feature-desc">You can <strong>remove any number of your summoned creatures</strong> within Melee range to add a +8 to your attack roll or +12 to your damage roll each. Gain Hope or clear HP equal to how much your target marks.
-            If this causes the target to mark their last HP, gain 1 summons token.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="showcase reveal">
-    <div class="showcase-text">
-      <span class="eyebrow">Subclass</span>
-      <h2>Behemoth <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
-      <p class="showcase-oneliner">Grow until nothing can stop you.</p>
-      <div class="showcase-body">
-        <p>
-          Take the strength of an army and condense it into a singular Summons, a demi-god under your control.
-        </p>
-        <p>
-          Spellcast trait: <strong>Presence</strong>
-        </p>
-      </div>
-      <div class="fit-note">
-        <strong>Design Note</strong>
-        This subclass could negatively blur the lines with the Beastbound Ranger.
-        To avoid that, we can lean on the design behind the Beastbound being focused around a parternship and how the mechanics represent that dependency on one another.
-        For this subclass, it should be focused on the Summons being a tool, non-autonomous, and separate the idea of a "partnership" with "master".
-      </div>
-    </div>
-    <div class="showcase-example">
-      <div class="feature-stack" style="width: 320px;">
-        <div class="feature-row">
-          <p class="feature-tier">Foundation</p>
-          <p class="feature-name">The One</p>
-          <p class="feature-desc">Your Summons damage die starts as a <strong>d8</strong>.</p>
-          <p class="feature-name">Combined Might</p>
-          <p class="feature-desc">When you spend a summons token while a Summons exists, a new Summons doesn't appear. Instead, for each token spent, the existing Summons gains the following:</p>
-          <ul>
-            <li>+4 on damage rolls</li>
-            <li>Grows in size</li>
-            <li>Increases your Severe threshold by +1</li>
-          </ul>
-        </div>
-        <div class="feature-row">
-          <p class="feature-tier">Specialization</p>
-          <p class="feature-name">Familiar Voice</p>
-          <p class="feature-desc">Your Summons obeys your commands comfortably. When you make an action roll that involves your Summons, gain a +2.</p>
-          <p class="feature-name">Expanded Presence</p>
-          <p class="feature-desc">When your Summons is existing while trying to persuade or intimdate someone, you can <strong>spend a Hope</strong> to add the following:</p>
-          <ul>
-            <li>On a Hope, gain an additional Hope.</li>
-            <li>On a Fear, you can remove 2 unspent Summons tokens to stop the GM from gaining a Fear.</li>
-          </ul>
-        </div>
-        <div class="feature-row tier-fear">
-          <p class="feature-tier">Mastery</p>
-          <p class="feature-name">Unbreakable Will</p>
-          <p class="feature-desc">When you take Severe damage, instead of your Summons being removed, you can <strong>mark a Stress</strong>.</p>
-          <p class="feature-name">As One</p>
-          <p class="feature-desc">Once per rest, when you spend a summons token that would create a Summons, you can <strong>spend a Hope</strong> to become a copy of it and must <strong>spend a Hope</strong> for every action after.
-            If you can't, you drop out of the copied form.
-            Your Summons can use your weapon feature on it's rolls.
-            You and your Summons can move up to Far range without having to make an Agility Reaction roll.
-            You can <strong>spend a hope</strong> to swap positions with your Summons within far range of each other.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="showcase reverse reveal">
-    <div class="showcase-text">
-      <span class="eyebrow fear">Subclass</span>
-      <h2>Totem <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
-      <p class="showcase-oneliner">Establish deliberate areas of influence.</p>
-      <div class="showcase-body">
-        <p>
-          Coming Soon...
-        </p>
-        <p>
-          Spellcast trait: <strong>Knowledge</strong>
-        </p>
-      </div>
-    </div>
-  </section>
-  <section class="showcase reveal">
-    <div class="showcase-text">
-      <span class="eyebrow">Subclass</span>
-      <h2>Swarm <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
-      <p class="showcase-oneliner">Endless. All-consuming. Don't fear the inevitable.</p>
-      <div class="showcase-body">
-        <p>
-          Open the portal to an endless wave of your will, drowning anyone who stands in the way.
-        </p>
-        <p>
-          Spellcast trait: <strong>Presence</strong>
-        </p>
-      </div>
-      <div class="fit-note">
-        <strong>Design Note</strong>
-        When it comes to overwhelming masses, that can be hard to do with the <em>Limit Cognitive Load</em> design principle.
-        The Swarm subclass is a player's opportunity to play a Leader type adversary, since those are the mechanics I borrowed to make it possible.
-      </div>
-    </div>
-    <div class="showcase-example">
-      <div class="feature-stack" style="width: 320px;">
-        <div class="feature-row">
-          <p class="feature-tier">Foundation</p>
-          <p class="feature-name">The Many</p>
-          <p class="feature-desc">Gain the <em>Swarm Sheet</em>. Your Summons damage die starts as a <strong>d4</strong>. Instead of gaining summons tokens up to your Spellcast trait, gain tokens equal to your level or Spellcast trait, whichever is higher.</p>
-          <p class="feature-name">Weaker Wills</p>
-          <p class="feature-desc">Instead of marking Stress to command additional Summons, you can also choose to <strong>spend a Hope</strong>.</p>
-          <p class="feature-name">Greater Command</p>
-          <p class="feature-desc">For each Summons you would spotlight, you can spotlight as many as equal to your tier.</p>
-        </div>
-        <div class="feature-row">
-          <p class="feature-tier">Specialization</p>
-          <p class="feature-name">Unrelenting</p>
-          <p class="feature-desc">When a Summons succeeds on an attack roll with Fear, you gain a Hope.</p>
-          <p class="feature-name">Collective Mark</p>
-          <p class="feature-desc">When a Summons makes an attack roll and there are other Summons within Very Close range of the target, you can make a <strong>Spellcast roll (16)</strong>. On a success, you can move the Summons to that target and add to the attack, dealing half damage.</p>
-        </div>
-        <div class="feature-row tier-fear">
-          <p class="feature-tier">Mastery</p>
-          <p class="feature-name">Volatile Mitosis</p>
-          <p class="feature-desc">When you mark Severe damage, roll d6s equal to your Spellcast trait. On a 6, choose a Summons. It splits into two <em>Volatile</em> Summons. The next time they obey your command, they are removed.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
   <div class="duality-divider">
     <div class="line hope-line"></div>
     <svg viewBox="0 0 24 24" fill="none"><polygon points="12,1 23,7.5 23,16.5 12,23 1,16.5 1,7.5" fill="none" stroke="var(--fear)" stroke-width="1.2"/></svg>
@@ -289,49 +55,13 @@
   </div>
 
   <!-- ============================================================
-       DOMAIN CARD TEMPLATE
+       DOMAINS — data-driven full gallery, rendered by
+       js/daggerheart.js. Every domain is always visible; the
+       horizontal nav scrolls to and highlights the matching card.
        ============================================================ -->
-  <section class="showcase reveal">
-    <div class="showcase-text">
-      <span class="eyebrow">Domain</span>
-      <h2>Domination</h2>
-      <p class="showcase-oneliner">The mastery of command, authority, and leadership.</p>
-      <div class="showcase-body">
-        <p>
-          Domination is the domain of authority and leadership. With the strength of a commander both in voice and in arm, those who practice their ability to cut through the noise of a battlefield have ultimate sway over who does what, when they want.
-          Wielders of Domination are promised obedience and they, in turn, lead inspiring victories.
-        </p>
-      </div>
-      <div class="fit-note">
-        <strong>Design Note</strong>
-        Daggerheart hosts a variety of domains that include attributes like inspiration, leadership, and persuasion. However, none of them deliberately focus on what it would look like to have a true leader that can manipulate both friend and foe.
-        This open space allows for a domain that focuses on players wanting a fantasy where their words matter, where they can influence the enemy past opposition, and make allies push past their usual limits.
-      </div>
-    </div>
-    <div class="showcase-example">
-      <div class="domain-card" style="--domain-color: var(--fear-dim);">
-        <div class="domain-card-header">
-          <div class="domain-card-badge domain-card-level">
-            3
-            <span class="badge-label">LEVEL</span>
-          </div>
-          <div class="domain-card-badge domain-card-cost">
-            1
-            <span class="badge-label">RECALL</span>
-          </div>
-          <p class="domain-card-domain">Domination</p>
-          <p class="domain-card-name">Guiding Words</p>
-        </div>
-        <div class="domain-card-body">
-          <p class="domain-card-type">Ability</p>
-          <p class="domain-card-text">
-            When a PC within Close range makes a successful attack, you can inspire them. <strong>Mark a Stress</strong> to give them a +1 Proficiency for the damage roll.
-            When an adversary within Close range makes a successful attack, you can cause them to lose concentration on who their target is supposed to be. <strong>Mark a Stress</strong> to cause them to roll 1 fewer damage die.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div id="domain-tab-strip" class="tab-strip-h"></div>
+  <div id="domain-cluster"></div>
+
 
   <div class="duality-divider">
     <div class="line hope-line"></div>
@@ -340,7 +70,7 @@
   </div>
 
   <!-- ============================================================
-       COLOSSUS TEMPLATE — placeholder pending stat block design
+       COLOSSUS TEMPLATE
        ============================================================ -->
   <section class="showcase solo reveal">
     <div class="showcase-text">
@@ -652,5 +382,6 @@
 </footer>
 
 <script src="js/script.js"></script>
+<script src="js/daggerheart.js"></script>
 </body>
 </html>
