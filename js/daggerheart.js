@@ -47,7 +47,7 @@ const CLASS_DATA = [
         {
           label: "Hope Feature", fear: true,
           entries: [
-            { name: "Beckon", desc: `<strong>Spend 3 Hope</strong> to gain <strong>1d4</strong> summons tokens, up to your Spellcast trait.` },
+            { name: "Obey", desc: `<strong>Spend 3 Hope</strong> to force an adversary to move up to Far range towards or away from you, avoiding harmful outcomes.` },
           ],
         },
       ],
@@ -68,10 +68,10 @@ const CLASS_DATA = [
             ]},
             { label: "Specialization", fear: false, entries: [
               { name: "Always Loyal", desc: `A summons can move up to Far range to get within Melee range of you. If this is used when an attack roll succeeds against you, you can remove the summons to add disadvantage to the attack roll.` },
-              { name: "The Gift of Servants", desc: `When you use a downtime move, you can use any unspent summons tokens to perform an addtional downtime move.` },
+              { name: "The Gift of Servants", desc: `During downtime, you can spend an unspent summons token on you or an ally, a maximum of one time, to gain an additional downtime move.` },
             ]},
             { label: "Mastery", fear: true, entries: [
-              { name: "Repurposed Servant", desc: `You can <strong>remove any number of your summoned creatures</strong> within Melee range to add a +8 to your attack roll or +12 to your damage roll each. Gain Hope or clear HP equal to how much your target marks. If this causes the target to mark their last HP, gain 1 summons token.` },
+              { name: "Repurposed Servant", desc: `You can <strong>remove any number of your summoned creatures</strong> within Melee range to add a +3 to your attack roll or +7 to your damage roll each. Gain Hope or clear HP equal to how much your target marks. If this causes the target to mark their last HP, gain 1 summons token.` },
             ]},
           ],
         },
@@ -97,7 +97,7 @@ const CLASS_DATA = [
             ]},
             { label: "Mastery", fear: true, entries: [
               { name: "Unbreakable Will", desc: `When you take Severe damage, instead of your Summons being removed, you can <strong>mark a Stress</strong>.` },
-              { name: "As One", desc: `Once per rest, when you spend a summons token that would create a Summons, you can <strong>spend a Hope</strong> to become a copy of it and must <strong>spend a Hope</strong> for every action after. If you can't, you drop out of the copied form. Your Summons can use your weapon feature on it's rolls. You and your Summons can move up to Far range without having to make an Agility Reaction roll. You can <strong>spend a hope</strong> to swap positions with your Summons within far range of each other.` },
+              { name: "As One", desc: `Once per rest, when you spend a summons token that would create a Summons, you can <strong>spend a Hope</strong> to also become a copy of it and must <strong>spend a Hope</strong> for every action after. If you can't, you drop out of the copied form. Your Summons can use your weapon feature on it's rolls. You and your Summons can move up to Far range without having to make an Agility Reaction roll. You can <strong>spend a hope</strong> to swap positions with your Summons within far range of each other.` },
             ]},
           ],
         },
@@ -128,7 +128,7 @@ const CLASS_DATA = [
               { name: "Collective Mark", desc: `When a Summons makes an attack roll and there are other Summons within Very Close range of the target, you can make a <strong>Spellcast roll (16)</strong>. On a success, you can move the Summons to that target and add to the attack, dealing half damage.` },
             ]},
             { label: "Mastery", fear: true, entries: [
-              { name: "Volatile Mitosis", desc: `When you mark Severe damage, roll d6s equal to your Spellcast trait. On a 6, choose a Summons. It splits into two <em>Volatile</em> Summons. The next time they obey your command, they are removed.` },
+              { name: "Volatile Mitosis", desc: `When you mark Severe damage, roll d6s equal to your Spellcast trait. On a 6, choose a Summons. Instead of being removed, it splits into two <em>Volatile</em> Summons. While <em>Volatile</em>, a Summons can obey one more command, then they are removed.` },
             ]},
           ],
         },
@@ -145,7 +145,7 @@ const DOMAIN_DATA = [
     oneliner: "The mastery of command, authority, and leadership.",
     description: `Domination is the domain of authority and leadership. With the strength of a commander both in voice and in arm, those who practice their ability to cut through the noise of a battlefield have ultimate sway over who does what, when they want. Wielders of Domination are promised obedience and they, in turn, lead inspiring victories.`,
     fitNoteLabel: "Design Note",
-    fitNoteHtml: `Daggerheart hosts a variety of domains that include attributes like inspiration, leadership, and persuasion. However, none of them deliberately focus on what it would look like to have a true leader that can manipulate both friend and foe. This open space allows for a domain that focuses on players wanting a fantasy where their words matter, where they can influence the enemy past opposition, and make allies push past their usual limits.<br>This section is currently iterating under the <em>Streamline, Then Streamline Again</em> design principle. Cards are being constantly adjusted, reworked, and removed to help the domain hone in on what it is supposed to represent.`,
+    fitNoteHtml: `Daggerheart hosts a variety of domains that include attributes like inspiration, leadership, and persuasion. However, none of them deliberately focus on what it would look like to have a true leader that can manipulate both friend and foe. This open space allows for a domain that focuses on players wanting a fantasy where their words matter, where they can influence the enemy past opposition, and make allies push past their usual limits.<br>Just like all other sections, this section is currently iterating under the <em>Streamline, Then Streamline Again</em> design principle. Cards are being constantly adjusted, reworked, and removed to help the domain hone in on what it is supposed to represent.`,
     cards: [
       {
         domainColor: "var(--fear-dim)",
@@ -313,7 +313,7 @@ const DOMAIN_DATA = [
         level: 10,
         recall: 2,
         type: "Ability",
-        text: `<strong>Spend a Hope</strong> before you make an attack or spellcast roll targeting an adversary. On a success, you can do one of the following: 1) The GM loses a Fear 2) Choose an adversary. That adversary must mark a Stress and you clear a Stress. 3) Cause the next successful attack against you to fail. The GM can still spend a Fear to deal half damage. If you succeed with Hope, you can choose two options.`,
+        text: `<strong>Spend a Hope</strong> before you make an attack or spellcast roll targeting an adversary. On a success, you can do one of the following: 1) The GM loses a Fear 2) Choose an adversary. That adversary must mark a Stress and you clear a Stress. 3) Cause the next successful attack against you to fail. The GM can still spend a Fear to deal half damage.<br>If you succeed with Hope, you can choose two options.`,
       },
     ],
   },
