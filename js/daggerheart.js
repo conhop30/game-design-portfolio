@@ -233,7 +233,7 @@ const DOMAIN_DATA = [
         level: 5,
         recall: 2,
         type: "Ability",
-        text: `At any time, you can <strong>mark 2 Stress</strong> to make an adversary leap to your aid. After an attack roll succeeds against you, but before the damage is rolled, you can target an adversary within Close range to protect you. The adversary moves within Melee range of you, and for every Hit Point you would mark, you can instead <strong>mark an armor slot</strong> to cause the adversary to mark a Hit Point instead.`,
+        text: `After an attack roll succeeds against you, but before the damage is rolled, you can <strong>mark 2 Stress</strong> to target an adversary within Close range to protect you. The adversary moves within Melee range of you, and for every Hit Point you would mark, you can instead <strong>mark an armor slot</strong> to cause the adversary to mark a Hit Point instead.`,
       },
       {
         domainColor: "var(--fear-dim)",
