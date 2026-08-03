@@ -8,10 +8,9 @@
       as before). Add a new class by adding an object to
       CLASS_DATA; nothing else needs to change.
 
-   2. DOMAINS — a full gallery (every domain always visible),
-      plus a horizontal nav of domain names that scrolls to and
-      briefly highlights the matching card, since nothing is
-      hidden/shown here.
+   2. DOMAINS — filtered by tab. Clicking a domain tab renders
+      that domain's description + fit-note, plus a dynamic
+      gallery of every card in its `cards` array.
    ============================================================ */
 
 /* ---------- CLASS DATA ---------- */
@@ -57,6 +56,7 @@ const CLASS_DATA = [
         key: "sacrificer",
         name: "Sacrificer",
         oneliner: "For when others are just pawns in your game.",
+        hook: "Play the Sacrificer if you want to wield your summoned creatures as expendable tools of raw power.",
         description: `Instead of focusing on sustaining your summoned creatures, they turn into batteries. When a Sacrificer needs to tap into their overwhelming strength, those that are under their rule will serve their finite, honorable purpose.<br><br>Spellcast trait: <strong>Presence</strong>`,
         fitNoteLabel: "Designer Note",
         fitNoteHtml: `Giving a PC the chance to narrate something so awesome in scale but potentially morally complex leads to compelling table dynamics. There is also room within the subclass ecosystem for a more selfish playstyle that doesn't actively detract from other PCs, but rather is a unique resource that the Summoner PC manages.`,
@@ -80,6 +80,7 @@ const CLASS_DATA = [
         key: "behemoth",
         name: "Behemoth",
         oneliner: "Grow until nothing can stop you.",
+        hook: "Play the Behemoth if you want to condense your summons into a single, unstoppable force.",
         description: `Take the strength of an army and condense it into a singular Summons, a demi-god under your control.<br><br>Spellcast trait: <strong>Presence</strong>`,
         fitNoteLabel: "Design Note",
         fitNoteHtml: `This subclass could negatively blur the lines with the Beastbound Ranger. To avoid that, we can lean on the design behind the Beastbound being focused around a parternship and how the mechanics represent that dependency on one another. For this subclass, it should be focused on the Summons being a tool, non-autonomous, and separate the idea of a "partnership" with "master".`,
@@ -106,6 +107,7 @@ const CLASS_DATA = [
         key: "totem",
         name: "Totem",
         oneliner: "Establish deliberate areas of influence.",
+        hook: "Play the Totem if you want to command the battlefield through fixed, lingering zones of power.",
         description: `Coming Soon...<br><br>Spellcast trait: <strong>Knowledge</strong>`,
         example: null,
       },
@@ -113,6 +115,7 @@ const CLASS_DATA = [
         key: "swarm",
         name: "Swarm",
         oneliner: "Endless. All-consuming. Don't fear the inevitable.",
+        hook: "Play the Swarm if you want to overwhelm your enemies with an endless tide of summoned minions.",
         description: `Open the portal to an endless wave of your will, drowning anyone who stands in the way.<br><br>Spellcast trait: <strong>Presence</strong>`,
         fitNoteLabel: "Design Note",
         fitNoteHtml: `When it comes to overwhelming masses, that can be hard to do with the <em>Limit Cognitive Load</em> design principle. The Swarm subclass is a player's opportunity to play a Leader type adversary, since those are the mechanics I borrowed to make it possible.`,
@@ -143,7 +146,7 @@ const DOMAIN_DATA = [
     key: "domination",
     name: "Domination",
     oneliner: "The mastery of command, authority, and leadership.",
-    description: `Domination is the domain of authority and leadership. With the strength of a commander both in voice and in arm, those who practice their ability to cut through the noise of a battlefield have ultimate sway over who does what, when they want. Wielders of Domination are promised obedience and they, in turn, lead inspiring victories.`,
+    description: `Domination is the domain of authority and leadership. With the strength of a commander both in voice and in arm, those who practice their ability to cut through the noise of a battlefield have ultimate sway over who does what, when they want. Wielders of Domination are promised obedience and they, in turn, lead inspiring victories.<br>Just like all other sections, this section is currently iterating under the <em>Streamline, Then Streamline Again</em> design principle. Cards are being constantly adjusted, reworked, and removed to help the domain hone in on what it is supposed to represent.`,
     fitNoteLabel: "Design Note",
     fitNoteHtml: `Daggerheart hosts a variety of domains that include attributes like inspiration, leadership, and persuasion. However, none of them deliberately focus on what it would look like to have a true leader that can manipulate both friend and foe. This open space allows for a domain that focuses on players wanting a fantasy where their words matter, where they can influence the enemy past opposition, and make allies push past their usual limits.<br>Just like all other sections, this section is currently iterating under the <em>Streamline, Then Streamline Again</em> design principle. Cards are being constantly adjusted, reworked, and removed to help the domain hone in on what it is supposed to represent. With the current iteration, I believe the cards are cool, but the thematic realization is still lacking. I want to make sure that the domain hits the right notes mechanically of having a card be able to target an ally or an adversary, as I believe that is where one of the strengths of being a prominent voice and visionary lies.`,
     cards: [
@@ -376,79 +379,112 @@ function buildDomainTabs() {
   });
 }
 
-/* ---------- SHARED RENDER HELPERS ---------- */
-function renderFeatureRows(tiers) {
-  return tiers.map((tier) => `
-    <div class="feature-row ${tier.fear ? "tier-fear" : ""}">
-      <p class="feature-tier">${tier.label}</p>
-      ${tier.entries.map((e) => `
-        <p class="feature-name">${e.name}</p>
-        <p class="feature-desc">${e.desc}</p>
-        ${e.list ? `<ul>${e.list.map((li) => `<li>${li}</li>`).join("")}</ul>` : ""}
-      `).join("")}
-    </div>
-  `).join("");
-}
+/* ---------- DOMAIN COLOR LOOKUP (for the class spread's left-column gradient) ---------- */
+const DOMAIN_COLOR_MAP = {
+  Domination: "var(--fear-dim)",
+  Arcana: "var(--domain-arcana)",
+  Blade: "var(--domain-blade)",
+  Bone: "var(--domain-bone)",
+  Codex: "var(--domain-codex)",
+  Grace: "var(--domain-grace)",
+  Midnight: "var(--domain-midnight)",
+  Sage: "var(--domain-sage)",
+  Splendor: "var(--domain-splendor)",
+  Valor: "var(--domain-valor)",
+};
 
-/* ---------- CLASS RENDERING ---------- */
-function renderClassBlock(cls) {
+/* ---------- CLASS PAGE-SPREAD RENDERING ----------
+   Modeled on Daggerheart's actual class-spread page layout:
+   a dark left column (Class info, background blended from the
+   class's two domain colors) and a white right column (the
+   active Subclass, with its own small switcher that only
+   re-renders this side — the Class column never changes). */
+function renderSpreadClassFeatures(cls) {
+  const hopeTier = cls.example.tiers.find((t) => t.label.toLowerCase().includes("hope"));
+  const featureTiers = cls.example.tiers.filter((t) => t !== hopeTier);
+
+  const statRow = (label, value) => value ? `
+    <div class="spread-stat">
+      <p class="spread-stat-label">${label}</p>
+      <p class="spread-stat-value">${value}</p>
+    </div>` : "";
+
+  const hopeRow = hopeTier ? `
+    <div class="spread-stat">
+      <p class="spread-stat-label">${hopeTier.label}</p>
+      <p class="spread-stat-value"><i>${hopeTier.entries[0].name}:</i> ${hopeTier.entries[0].desc}</p>
+    </div>` : "";
+
+  const featuresHtml = featureTiers.map((t) => t.entries.map((e) => `
+    <p class="spread-feature-name">${e.name}</p>
+    <p class="spread-feature-desc">${e.desc}</p>
+    ${e.list ? `<ul>${e.list.map((li) => `<li>${li}</li>`).join("")}</ul>` : ""}
+  `).join("")).join("");
+
   return `
-    <section class="showcase reveal is-visible">
-      <div class="showcase-text">
-        <span class="eyebrow">Class</span>
-        <h2>${cls.name}</h2>
-        <p class="showcase-oneliner"><em>${cls.oneliner}</em></p>
-        <div class="showcase-body"><p>${cls.description}</p></div>
-        <div class="domain-pills">
-          ${cls.domains.map((d) => `<span class="domain-pill">Domain: ${d}</span>`).join("")}
-        </div>
-        <div class="fit-note">
-          <strong>${cls.fitNoteLabel}</strong>
-          ${cls.fitNoteHtml}
-        </div>
-      </div>
-      <div class="showcase-example">
-        <div class="feature-stack" style="width: 320px;">
-          ${renderFeatureRows(cls.example.tiers)}
-        </div>
-      </div>
-    </section>
+    ${statRow("Domains", cls.domains.join(" and "))}
+    ${statRow("Starting Evasion", cls.startingEvasion)}
+    ${statRow("Starting Hit Points", cls.startingHitPoints)}
+    ${statRow("Class Items", cls.classItems)}
+    ${hopeRow}
+    <p class="spread-features-header">Class Features</p>
+    ${featuresHtml}
   `;
 }
 
-function renderSubclassBlock(sub, index) {
-  const reverse = index % 2 === 1;
+function renderSpreadSubclassFeatures(sub) {
   if (!sub.example) {
-    return `
-      <section class="showcase solo reveal is-visible">
-        <div class="showcase-text">
-          <span class="eyebrow ${reverse ? "fear" : ""}">Subclass</span>
-          <h2>${sub.name} <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
-          <p class="showcase-oneliner">${sub.oneliner}</p>
-          <div class="showcase-body"><p>${sub.description}</p></div>
-        </div>
-      </section>
-    `;
+    return `<p class="spread-feature-desc">${sub.description}</p>`;
   }
+  return sub.example.tiers.map((tier) => `
+    <p class="spread-tier-header"><span class="tier-bullet"></span>${tier.label} Features</p>
+    ${tier.entries.map((e) => `
+      <p class="spread-feature-inline"><i>${e.name}:</i> ${e.desc}</p>
+      ${e.list ? `<ul class="spread-inline-list">${e.list.map((li) => `<li>${li}</li>`).join("")}</ul>` : ""}
+    `).join("")}
+  `).join("");
+}
+
+function renderSpreadRight(cls, subKey) {
+  const sub = cls.subclasses.find((s) => s.key === subKey) || cls.subclasses[0];
   return `
-    <section class="showcase ${reverse ? "reverse" : ""} reveal is-visible">
-      <div class="showcase-text">
-        <span class="eyebrow ${reverse ? "fear" : ""}">Subclass</span>
-        <h2>${sub.name} <span style="color: var(--parchment-dim); font-size: 0.6em;">— Summoner</span></h2>
-        <p class="showcase-oneliner">${sub.oneliner}</p>
-        <div class="showcase-body"><p>${sub.description}</p></div>
-        ${sub.fitNoteHtml ? `
-          <div class="fit-note">
-            <strong>${sub.fitNoteLabel}</strong>
-            ${sub.fitNoteHtml}
-          </div>` : ""}
+    <div class="spread-subclass-tabs">
+      ${cls.subclasses.map((s) => `<button class="spread-sub-tab ${s.key === sub.key ? "active" : ""}" data-sub="${s.key}">${s.name}</button>`).join("")}
+    </div>
+    <p class="spread-subclass-header">${cls.name} Subclasses</p>
+    <p class="spread-subclass-chooser">Choose a subclass to specialize your ${cls.name}.</p>
+    <div class="spread-subclass-banner">${sub.name}</div>
+    <p class="spread-subclass-hook">${sub.hook || sub.oneliner}</p>
+    ${renderSpreadSubclassFeatures(sub)}
+  `;
+}
+
+function attachSpreadSubTabs(cls) {
+  document.querySelectorAll(".spread-sub-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const right = document.getElementById("spread-right");
+      if (!right) return;
+      right.innerHTML = renderSpreadRight(cls, btn.dataset.sub);
+      attachSpreadSubTabs(cls);
+    });
+  });
+}
+
+function renderClassSpread(cls) {
+  const domainColors = cls.domains.map((d) => DOMAIN_COLOR_MAP[d] || "var(--fear-dim)");
+  const gradient = `linear-gradient(160deg, ${domainColors[0]}, ${domainColors[1] || domainColors[0]})`;
+
+  return `
+    <div class="class-spread reveal is-visible">
+      <div class="spread-left" style="background: ${gradient};">
+        <h1 class="spread-title">${cls.name}</h1>
+        <p class="spread-desc">${cls.description}</p>
+        ${renderSpreadClassFeatures(cls)}
       </div>
-      <div class="showcase-example">
-        <div class="feature-stack" style="width: 320px;">
-          ${renderFeatureRows(sub.example.tiers)}
-        </div>
+      <div class="spread-right" id="spread-right">
+        ${renderSpreadRight(cls, cls.subclasses[0].key)}
       </div>
-    </section>
+    </div>
   `;
 }
 
@@ -457,7 +493,8 @@ function renderClassCluster(classKey) {
   const container = document.getElementById("class-cluster");
   if (!cls || !container) return;
 
-  container.innerHTML = renderClassBlock(cls) + cls.subclasses.map((s, i) => renderSubclassBlock(s, i)).join("");
+  container.innerHTML = renderClassSpread(cls);
+  attachSpreadSubTabs(cls);
 
   document.querySelectorAll("#class-tab-strip .tab-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.key === classKey);
@@ -473,38 +510,6 @@ function buildClassTabs() {
   strip.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => renderClassCluster(btn.dataset.key));
   });
-}
-
-/* ---------- DOMAIN RENDERING ---------- */
-function renderDomainBlock(domain) {
-  return `
-    <section id="domain-${domain.key}" class="showcase reveal is-visible domain-block">
-      <div class="showcase-text">
-        <span class="eyebrow">Domain</span>
-        <h2>${domain.name}</h2>
-        <p class="showcase-oneliner">${domain.oneliner}</p>
-        <div class="showcase-body"><p>${domain.description}</p></div>
-        <div class="fit-note">
-          <strong>${domain.fitNoteLabel}</strong>
-          ${domain.fitNoteHtml}
-        </div>
-      </div>
-      <div class="showcase-example">
-        <div class="domain-card" style="--domain-color: ${domain.card.domainColor};">
-          <div class="domain-card-header">
-            <div class="domain-card-badge domain-card-level">${domain.card.level}<span class="badge-label">LEVEL</span></div>
-            <div class="domain-card-badge domain-card-cost">${domain.card.recall}<span class="badge-label">RECALL</span></div>
-            <p class="domain-card-domain">${domain.name}</p>
-            <p class="domain-card-name">${domain.card.cardName}</p>
-          </div>
-          <div class="domain-card-body">
-            <p class="domain-card-type">${domain.card.type}</p>
-            <p class="domain-card-text">${domain.card.text}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  `;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
