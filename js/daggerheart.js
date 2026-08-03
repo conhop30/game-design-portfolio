@@ -21,6 +21,9 @@ const CLASS_DATA = [
     oneliner: "A friend is never far away... a subordinate would also do.",
     description: `The Summoner is focused on controlling a space either by bolstering allies or subjugating adversaries. Should they so choose, they can rely solely on themselves, summoning their own creatures and subordinates. When the Summoner enters a room, they are never alone and any who oppose them could very well find themselves a subject under the Summoner's thumb.`,
     domains: ["Domination", "Grace"],
+    startingEvasion: "10",
+    startingHitPoints: "5",
+    classItems: "An item from a past role model or an endless list of tasks",
     fitNoteLabel: "Design Note",
     fitNoteHtml: `Daggerheart has focused primarily on a hero being the source of power, with a few explorations of other entities being integrated via constructs and the Beastbound Ranger. Devoting a whole class to a Summoner was a deliberate decision, as this fantasy can be expanded past the scope of a subclass. Potential subclasses would include:
       <ul><li>Swarm</li><li>Behemoth</li><li>Totem</li><li>Sacrificer</li></ul>`,
